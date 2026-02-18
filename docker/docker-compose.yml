@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  openclaw:
+    image: alpine:3.20
+    command: ["sh", "-lc", "echo 'Placeholder: troque por sua imagem do OpenClaw'; sleep 3600"]
+    volumes:
+      - ./workspace:/workspace
+    working_dir: /workspace
+    ports:
+      - "127.0.0.1:18789:18789"
