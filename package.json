@@ -1,7 +1,10 @@
 {
-  "name": "openclaw",
-  "version": "3.0.0",
-  "description": "CLI e starter kit para configuração segura do OpenClaw em VPS, Mac, Windows e Docker",
+  "name": "@fabioforest/openclaw",
+  "version": "3.2.0",
+  "description": "Agentes autônomos para engenharia de software",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "bin/openclaw.js",
   "bin": {
     "openclaw": "./bin/openclaw.js"

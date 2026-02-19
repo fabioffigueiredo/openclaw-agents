@@ -6,10 +6,10 @@ CLI e starter kit para configuração segura do OpenClaw em VPS, Mac, Windows e 
 
 ```bash
 # Via npx (recomendado)
-npx openclaw init
+npx @fabioforest/openclaw init
 
 # Ou instale globalmente
-npm install -g openclaw
+npm install -g @fabioforest/openclaw
 openclaw init
 ```
 

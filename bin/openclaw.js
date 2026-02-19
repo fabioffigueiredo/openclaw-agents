@@ -26,6 +26,8 @@ const COMMANDS = {
     update: "../lib/cli/update",
     status: "../lib/cli/status",
     doctor: "../lib/cli/doctor",
+    debug: "../lib/cli/debug",
+    check: "../lib/cli/orchestrate",
 };
 
 /**
@@ -34,7 +36,10 @@ const COMMANDS = {
  * @returns {{ command: string|null, flags: object }}
  */
 function parseArgs(argv) {
-    const flags = {};
+    const flags = {
+        plan: true, // Default: PLAN mode (read-only)
+        audit: true // Default: Generate audit logs
+    };
     let command = null;
 
     for (let i = 0; i < argv.length; i++) {
@@ -47,14 +52,27 @@ function parseArgs(argv) {
         } else if (arg === "--force" || arg === "-f") {
             flags.force = true;
         } else if (arg === "--path" || arg === "-p") {
-            // Próximo argumento é o caminho
             flags.path = argv[++i] || ".";
         } else if (arg === "--quiet" || arg === "-q") {
             flags.quiet = true;
+        } else if (arg === "--apply") {
+            flags.apply = true;
+            flags.plan = false; // Apply overrides Plan default
+        } else if (arg === "--plan") {
+            flags.plan = true;
+        } else if (arg === "--yes" || arg === "-y") {
+            flags.yes = true;
+        } else if (arg === "--no-audit") {
+            flags.audit = false;
+        } else if (arg === "--merge") {
+            flags.merge = true;
         } else if (!arg.startsWith("-") && !command) {
             command = arg;
         }
     }
+
+    // Se apply foi passado, plan é false (a menos que forçado explicitamente, mas apply vence na lógica acima)
+    // Se o usuário não passar nada, plan=true (default)
 
     return { command, flags };
 }
@@ -74,19 +92,25 @@ function showHelp() {
     status    Mostra status da instalação
     doctor    Healthcheck automatizado do ambiente
     setup     Roda wizard interativo de configuração
+    debug     Diagnóstico avançado de instalação e rede
+    check     Orquestrador inteligente (instala ou repara)
 
-  Opções:
+  Opções Globais:
     --path, -p <dir>   Diretório alvo (padrão: ./)
-    --force, -f        Sobrescreve .agent/ existente (init)
+    --plan             Modo Simulação (PADRÃO): Mostra o que será feito sem alterar nada
+    --apply            Modo Execução: Aplica as alterações propostas
+    --yes, -y          Confirma automaticamente (skip prompts)
+    --force, -f        Permite operações destrutivas (exige confirmação forte)
+    --no-audit         Desabilita geração de logs de auditoria
+    --merge            Atualização segura (não sobrescreve customizações)
     --quiet, -q        Saída mínima
     --help, -h         Mostra esta ajuda
     --version, -v      Mostra a versão
 
   Exemplos:
-    npx openclaw init
-    npx openclaw init --force --path ./meu-projeto
-    npx openclaw doctor
-    npx openclaw status
+    npx openclaw init --plan           (Simula instalação)
+    npx openclaw init --apply          (Instala de fato)
+    npx openclaw check                 (Orquestrador seguro)
 `);
 }
 

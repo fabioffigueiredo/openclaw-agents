@@ -52,13 +52,13 @@ Isso disponibilizará o comando `npx openclaw` globalmente.
    ```bash
    mkdir -p ~/openclaw-workspace
    cd ~/openclaw-workspace
-   npx openclaw init
+   npx @fabioforest/openclaw init
    ```
 
 3. **Configuração**
    Rode o wizard interativo:
    ```bash
-   npx openclaw setup
+   npx @fabioforest/openclaw setup
    ```
    Siga as instruções para configurar token e canais.
 
