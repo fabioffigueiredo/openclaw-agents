@@ -1,0 +1,44 @@
+{
+  "name": "openclaw",
+  "version": "3.0.0",
+  "description": "CLI e starter kit para configuração segura do OpenClaw em VPS, Mac, Windows e Docker",
+  "main": "bin/openclaw.js",
+  "bin": {
+    "openclaw": "./bin/openclaw.js"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "templates/"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "setup": "node lib/setup/config_wizard.js",
+    "docker:build": "docker build -t openclaw -f docker/Dockerfile ."
+  },
+  "keywords": [
+    "openclaw",
+    "agent",
+    "security",
+    "devops",
+    "cli",
+    "wireguard",
+    "vpn",
+    "sysadmin"
+  ],
+  "author": "Fabio Figueiredo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioffigueiredo/openclaw-agents"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.18",
+    "vitest": "^4.0.18"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

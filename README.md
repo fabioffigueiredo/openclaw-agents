@@ -1,51 +1,88 @@
-# OpenClaw OS (starter kit)
+# OpenClaw OS
 
-Este repositório é um **kit completo** para começar uma instalação segura do OpenClaw em:
-- Linux (VPS ou local)
-- macOS
-- Windows (incluindo WSL2)
-- Docker (recomendado para padronizar ambiente)
+CLI e starter kit para configuração segura do OpenClaw em VPS, Mac, Windows e Docker.
 
-## O que vem aqui dentro
-- `skills/universal-setup/`: Super Skill interativa (wizard) que configura `openclaw.json`, memória e canais.
-- `skills/openclaw-ops/`: Skills operacionais (VPN WireGuard, enroll, policy, exec, transfer, audit, update, health).
-- `agents/`: Personas/operadores sugeridos.
-- `rules/`: Guardrails (segurança por padrão).
-- `workflows/`: Runbooks de operação (healthcheck, restart, coletar logs).
-- `docker/`: Compose e templates para rodar em container.
-- `docs/`: Threat model, checklist e guia de hardening.
+## Instalação
 
-## Como usar (rápido)
-1) Extraia o zip (ou clone o repo).
-2) Copie as skills para o workspace do OpenClaw:
-   - Linux/macOS/VPS: `~/.openclaw/workspace/skills/`
-   - Docker: para o volume mapeado do seu workspace
-3) Rode o wizard:
-   ```bash
-   node scripts/config_wizard.js
-   ```
-   (ou no chat do agente: **"rodar setup universal"**)
-
-## Segurança (importante)
-- Use **somente em máquinas que você possui ou tem permissão explícita**.
-- Padrão: **VPN-first + bind localhost + token**.
-- Não exponha painel/API publicamente.
-
-## Gerar zip
-Linux/macOS:
 ```bash
-zip -r openclaw-agents.zip .
-```
-Windows PowerShell:
-```powershell
-Compress-Archive -Path * -DestinationPath openclaw-agents.zip
+# Via npx (recomendado)
+npx openclaw init
+
+# Ou instale globalmente
+npm install -g openclaw
+openclaw init
 ```
 
-## Publicar no GitHub
+## Comandos
+
+| Comando | Descrição |
+|---------|-----------|
+| `openclaw init` | Instala templates `.agent/` no projeto |
+| `openclaw update` | Atualiza templates preservando customizações |
+| `openclaw status` | Mostra status da instalação |
+| `openclaw doctor` | Healthcheck automatizado do ambiente |
+| `openclaw setup` | Roda wizard interativo de configuração |
+
+### Opções
+
 ```bash
-git init
-git remote add origin git@github.com:fabioffigueiredo/openclaw-agents.git
-git add .
-git commit -m "OpenClaw OS starter kit"
-git push -u origin main
+openclaw init --force          # Sobrescreve .agent/ existente
+openclaw init --path ./dir     # Instala em diretório específico
+openclaw doctor --quiet        # Saída mínima
 ```
+
+## O que é instalado
+
+O comando `init` cria a seguinte estrutura no seu projeto:
+
+```
+.agent/
+├── agents/            # Personas de agente (ex: sysadmin-proativo)
+├── hooks/             # Hooks de segurança (PreToolUse)
+├── rules/             # Guardrails de segurança
+├── skills/
+│   ├── universal-setup/   # Wizard de configuração interativo
+│   └── openclaw-ops/      # 8 skills operacionais
+└── workflows/         # Runbooks e slash commands
+```
+
+### Skills Operacionais
+
+| # | Skill | Descrição |
+|---|-------|-----------|
+| 01 | VPN WireGuard | Provisiona VPN entre VPS e hosts |
+| 02 | Enroll Host | Onboarding com aprovação humana |
+| 03 | Policy Baseline | RBAC + allowlists deny-by-default |
+| 04 | Remote Exec | Runbooks com timeout e auditoria |
+| 05 | File Transfer | Transferência com hash e allowlist |
+| 06 | Audit Logging | Log JSON com redaction de segredos |
+| 07 | Safe Update | Canary + rollback automático |
+| 08 | Healthchecks | Circuit breaker + auto-restart |
+
+## Segurança
+
+- **VPN-first** — sem VPN, sem acesso remoto
+- **bind localhost** + **auth token** por padrão
+- **Hook `pre-tool-use`** — bloqueia comandos destrutivos (`rm -rf`, `mkfs`, `dd`, `shutdown`)
+- **Break-glass** — acesso emergencial com expiração automática
+- **Auditoria** — todos os eventos logados com `request_id`
+
+## Desenvolvimento
+
+```bash
+# Instalar dependências
+npm install
+
+# Rodar testes
+npm test
+
+# Testes com watch
+npm run test:watch
+
+# Coverage
+npm run test:coverage
+```
+
+## Licença
+
+MIT

@@ -1,0 +1,21 @@
+# OpenClaw config (contém tokens/segredos)
+openclaw.json
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Ambiente
+.env
+.env.*
+
+# Arquivos temporários
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
