@@ -16,8 +16,7 @@ Esta skill roda um assistente interativo que:
   (o usuário escolhe quais pastas o agente pode acessar)
 
 ## Como usar
-Execute:
-- `node scripts/config_wizard.js`
+- `npx openclaw setup`
 ou peça no chat:
 - "rodar setup universal"
 - "configure meu ambiente"
