@@ -12,6 +12,7 @@ package-lock.json
 # Arquivos temporários
 *.tmp
 *.bak
+tmp/
 
 # OS
 .DS_Store

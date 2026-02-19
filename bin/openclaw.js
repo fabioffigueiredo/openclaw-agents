@@ -24,10 +24,14 @@ const pkg = require("../package.json");
 const COMMANDS = {
     init: "../lib/cli/init",
     update: "../lib/cli/update",
+    uninstall: "../lib/cli/uninstall",
     status: "../lib/cli/status",
     doctor: "../lib/cli/doctor",
     debug: "../lib/cli/debug",
     check: "../lib/cli/orchestrate",
+    inspect: "../lib/cli/inspect",
+    assist: "../lib/cli/assist",
+    ide: "../lib/cli/ide",
 };
 
 /**
@@ -89,11 +93,15 @@ function showHelp() {
   Comandos:
     init      Instala templates .agent/ no projeto atual
     update    Atualiza templates preservando customizações
+    uninstall Remove .agent/ e openclaw.json (com backup)
     status    Mostra status da instalação
     doctor    Healthcheck automatizado do ambiente
     setup     Roda wizard interativo de configuração
     debug     Diagnóstico avançado de instalação e rede
     check     Orquestrador inteligente (instala ou repara)
+    inspect   Analisa ambiente e contexto (100% read-only)
+    assist    Assistente geral com roteamento de skills
+    ide       Instala AI OS na IDE (ide install / ide doctor)
 
   Opções Globais:
     --path, -p <dir>   Diretório alvo (padrão: ./)
@@ -111,6 +119,9 @@ function showHelp() {
     npx openclaw init --plan           (Simula instalação)
     npx openclaw init --apply          (Instala de fato)
     npx openclaw check                 (Orquestrador seguro)
+    npx openclaw inspect               (Analisa contexto)
+    npx openclaw assist                (Assistente geral)
+    npx openclaw ide install --apply   (Instala AI OS na IDE)
 `);
 }
 

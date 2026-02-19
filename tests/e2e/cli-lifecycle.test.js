@@ -27,10 +27,10 @@ describe("CLI End-to-End Lifecycle", () => {
     });
 
     it("fluxo completo: init -> status -> doctor -> update", () => {
-        // 1. INIT
-        const initRes = runCli(["init", "--path", "."], tmpDir);
+        // 1. INIT (--apply --yes necessários: plan-first por padrão + prompt interativo)
+        const initRes = runCli(["init", "--apply", "--yes", "--path", "."], tmpDir);
         expect(initRes.status).toBe(0);
-        expect(initRes.stdout).toContain(".agent/ instalado com sucesso");
+        expect(initRes.stdout).toContain("Concluído com sucesso");
         expect(fs.existsSync(path.join(tmpDir, ".agent/agents/sysadmin-proativo.md"))).toBe(true);
         expect(fs.existsSync(path.join(tmpDir, "openclaw.json"))).toBe(true);
 
@@ -51,10 +51,10 @@ describe("CLI End-to-End Lifecycle", () => {
         const customContent = "CUSTOMIZADO PELO USUÁRIO";
         fs.writeFileSync(agentFile, customContent);
 
-        // 5. UPDATE
-        const updateRes = runCli(["update", "--path", "."], tmpDir);
+        // 5. UPDATE (--apply --yes: plan-first + prompt interativo)
+        const updateRes = runCli(["update", "--apply", "--yes", "--path", "."], tmpDir);
         expect(updateRes.status).toBe(0);
-        expect(updateRes.stdout).toContain("Update concluído");
+        expect(updateRes.stdout).toContain("concluída com sucesso");
 
         // Verifica se customização foi movida para backup
         expect(fs.existsSync(agentFile + ".bak")).toBe(true);
@@ -64,8 +64,8 @@ describe("CLI End-to-End Lifecycle", () => {
         const templateContent = fs.readFileSync(path.join(__dirname, "../../templates/.agent/agents/sysadmin-proativo.md"), "utf8");
         expect(fs.readFileSync(agentFile, "utf8")).toBe(templateContent);
 
-        // 6. INIT --FORCE (deve sobrescrever)
-        const forceRes = runCli(["init", "--force", "--path", "."], tmpDir);
+        // 6. INIT --FORCE (--apply --yes necessários)
+        const forceRes = runCli(["init", "--force", "--apply", "--yes", "--path", "."], tmpDir);
         expect(forceRes.status).toBe(0);
         // Verifica se customização foi perdida (sobrescrita pelo template original)
         expect(fs.readFileSync(agentFile, "utf8")).toBe(templateContent);

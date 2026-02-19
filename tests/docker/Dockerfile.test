@@ -1,0 +1,30 @@
+# Dockerfile para teste E2E do OpenClaw CLI
+# Simula ambiente limpo (Ubuntu) para testar instalação via npx
+
+FROM node:22-slim
+
+# Instalar ferramentas básicas de sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    jq \
+    && rm -rf /var/lib/apt/lists/*
+
+# Criar diretório de trabalho limpo
+WORKDIR /workspace
+
+# Copiar o projeto para instalar localmente
+COPY . /app/openclaw-agents
+
+# Instalar dependências e linkar globalmente
+RUN cd /app/openclaw-agents && npm install --omit=dev \
+    && chmod +x bin/openclaw.js \
+    && npm link 2>/dev/null; \
+    ln -sf /app/openclaw-agents/bin/openclaw.js /usr/local/bin/openclaw
+
+# Copiar script de teste E2E
+COPY tests/docker/test-flow.sh /workspace/test-flow.sh
+RUN chmod +x /workspace/test-flow.sh
+
+# Comando padrão: rodar o teste
+CMD ["/workspace/test-flow.sh"]

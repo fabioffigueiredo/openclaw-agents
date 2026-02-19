@@ -1,0 +1,34 @@
+{
+    "project_status": "active",
+    "project_name": "default",
+    "sprint_goal": "",
+    "agents": [
+        {
+            "id": "orchestrator",
+            "role": "orchestrator",
+            "active": true
+        },
+        {
+            "id": "researcher",
+            "role": "researcher",
+            "active": true
+        },
+        {
+            "id": "writer",
+            "role": "writer",
+            "active": true
+        },
+        {
+            "id": "reviewer",
+            "role": "reviewer",
+            "active": true
+        }
+    ],
+    "task_queue": [],
+    "history": [],
+    "settings": {
+        "work_dir": "mission_control",
+        "max_tasks_per_tick": 2,
+        "default_priority": "medium"
+    }
+}

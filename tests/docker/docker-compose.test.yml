@@ -1,0 +1,25 @@
+# Docker Compose para teste E2E do OpenClaw CLI
+# Usa Ollama local (host.docker.internal:11434) como provedor de IA
+#
+# Uso:
+#   docker compose -f tests/docker/docker-compose.test.yml up --build
+#   docker compose -f tests/docker/docker-compose.test.yml run test bash
+#   docker compose -f tests/docker/docker-compose.test.yml down
+
+services:
+  test:
+    build:
+      context: ../..
+      dockerfile: tests/docker/Dockerfile.test
+    container_name: openclaw-test
+    environment:
+      # Ollama rodando no host via Docker Desktop
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Monta o projeto como volume para iteração rápida
+      - ../../:/app/openclaw-agents:ro
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
