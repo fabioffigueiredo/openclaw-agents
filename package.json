@@ -1,6 +1,6 @@
 {
   "name": "@fabioforest/openclaw",
-  "version": "3.11.4",
+  "version": "3.11.5",
   "description": "Agentes autônomos para engenharia de software",
   "publishConfig": {
     "access": "public"
