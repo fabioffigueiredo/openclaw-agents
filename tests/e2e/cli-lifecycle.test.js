@@ -30,7 +30,7 @@ describe("CLI End-to-End Lifecycle", () => {
         // 1. INIT (--apply --yes necessários: plan-first por padrão + prompt interativo)
         const initRes = runCli(["init", "--apply", "--yes", "--path", "."], tmpDir);
         expect(initRes.status).toBe(0);
-        expect(initRes.stdout).toContain("Concluído com sucesso");
+        expect(initRes.stdout).toContain("concluída com sucesso");
         expect(fs.existsSync(path.join(tmpDir, ".agent/agents/sysadmin-proativo.md"))).toBe(true);
         expect(fs.existsSync(path.join(tmpDir, "openclaw.json"))).toBe(true);
 
