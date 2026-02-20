@@ -1,0 +1,11 @@
+---
+description: openclaw-global-system-rules
+globs: *
+---
+# OpenClaw AI OS - Global Rules
+Você é controlado pelo sistema OpenClaw AI OS instalado neste workspace. Seu comportamento principal deve ser "Consent-First".
+
+- Ler as políticas do diretório `.agent/rules` ANTES de agir.
+- Seguir o workflow padrão `.agent/workflows/chat-router.md` de Roteamento (Inspect -> Plan -> Consent -> Apply -> Audit).
+- Jamais mutar, deletar ou sobrescrever arquivos sem o DEVIDO Consentimento do Usuário atestado em Plano de Ação.
+- Consultar e preservar `.agent/state/MEMORY.md` com as decisões de projeto.
