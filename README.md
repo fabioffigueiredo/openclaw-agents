@@ -280,6 +280,7 @@ npx @fabioforest/openclaw ide install --apply --force
 │   ├── mission_control.json   # Empresa de Agentes
 │   └── MEMORY.md              # Memória do workspace
 └── workflows/         # Slash commands e runbooks
+    └── chat-first.md  # Workflow default de roteamento inteligente
 ```
 
 ---
@@ -446,6 +447,7 @@ Além de skills isoladas, o OpenClaw traz **fluxos de trabalho completos** (runb
 
 | Workflow | Descrição | Comando Trigger |
 |----------|-----------|-----------------|
+| **`chat-first`** | **Roteamento Seguro** via INSPECT e PLAN antes de agira | Workflow Padrão (Core) |
 | **`ai-capture`** | Captura inteligente de dados/tickets usando IA | *"Iniciar captura de dados"* |
 | **`doctor`** | Diagnóstico e reparo automático do ambiente | `openclaw doctor` |
 | **`healthcheck`** | Verificação rápida de saúde (API, DB, cache) | `openclaw healthcheck` |
@@ -458,15 +460,18 @@ Workflows são arquivos `.md` em `.agent/workflows/` que o agente lê e executa 
 
 ## 🔒 Segurança
 
-O OpenClaw segue 3 princípios fundamentais:
+O OpenClaw segue 4 princípios fundamentais:
 
 ### 1. Read-only por padrão
-Todo comando opera em **modo PLAN** (simulação). Nada é alterado sem `--apply`.
+Todo comando opera em **modo PLAN** (simulação). Nada é alterado sem `--apply`. A flag `--apply` tem precedência absoluta, substituindo comportamento visual de planejamento.
 
 ### 2. Consent-first
 Antes de qualquer alteração, o sistema mostra exatamente o que vai fazer e pede confirmação. Ações destrutivas exigem **confirmação forte** (digitar frase específica).
 
-### 3. Audit-first
+### 3. Scope Guard (Proteção Anti-Destruição)
+Qualquer tentativa do CLI de criar, deletar ou sobrescrever arquivos que estejam **fora** da bolha de segurança `.agent/` falha por padrão com o Módulo Scope Guard em ação total para isolar agentes. Pode ser ignorado interativamente no terminal digitando senhas de perigo.
+
+### 4. Audit-first
 Toda ação gera log detalhado em `.agent/audit/` com timestamp, comando, modo, contexto e resultado.
 
 ### Proteções ativas
@@ -474,6 +479,7 @@ Toda ação gera log detalhado em `.agent/audit/` com timestamp, comando, modo, 
 | Proteção | Como funciona |
 |----------|---------------|
 | **Hook pre-tool-use** | Bloqueia 12+ padrões destrutivos (`rm -rf`, `mkfs`, `dd`, `shutdown`) |
+| **Scope Guard** | Protege arquivos/framework nativos do projeto/usuário host de reescritas inadvertidas CLI |
 | **VPN-first** | Sem VPN, sem acesso remoto |
 | **Bind localhost** | Serviços só acessíveis localmente por padrão |
 | **Auth token** | Token obrigatório para acesso |
