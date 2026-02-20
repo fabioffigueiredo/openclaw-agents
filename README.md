@@ -3,7 +3,7 @@
 **O Sistema Operacional de Agentes de IA para qualquer IDE.**
 *Transforme seu Cursor, VS Code, Windsurf ou Gemini no assistente de software perfeito – com total controle, segurança e sem gastar seus tokens à toa.*
 
-![OpenClaw Architecture](/Users/fabiofigueiredo/.gemini/antigravity/brain/297c5802-f14c-414e-beb7-f75597a0893c/openclaw_architecture_1771620472113.png)
+![OpenClaw Architecture](./docs/assets/openclaw_architecture_1771620472113.png)
 
 ---
 
@@ -23,7 +23,7 @@ O **OpenClaw** resolve isso. Ele instala um "cérebro" seguro (um diretório ocu
 
 ## 🔌 Compatibilidade Universal (Multi-IDE)
 
-![IDE Adapters](/Users/fabiofigueiredo/.gemini/antigravity/brain/297c5802-f14c-414e-beb7-f75597a0893c/openclaw_ide_adapters_1771620563799.png)
+![IDE Adapters](./docs/assets/openclaw_ide_adapters_1771620563799.png)
 
 O OpenClaw detecta automaticamente o que você está usando e instala apenas o necessário. Suportamos nativamente através do framework *Chat-First*:
 - **Cursor** (`.cursorrules`)
@@ -65,7 +65,7 @@ Se tudo estiver com um ✅ verde, você está pronto para conversar com a IA no 
 
 ## 🔒 Como funciona a Segurança? (O Fluxo de Consentimento)
 
-![CLI Workflow](/Users/fabiofigueiredo/.gemini/antigravity/brain/297c5802-f14c-414e-beb7-f75597a0893c/openclaw_cli_workflow_1771620533472.png)
+![CLI Workflow](./docs/assets/openclaw_cli_workflow_1771620533472.png)
 
 Nós não confiamos cegamente na IA. Todo comando importante que o OpenClaw executa passa pelo **Orchestrator**, seguindo um fluxo de 5 etapas:
 
