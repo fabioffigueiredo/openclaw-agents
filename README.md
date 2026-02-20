@@ -1,7 +1,7 @@
 # 🦀 OpenClaw AI OS
 **Sistema operacional de agentes de IA seguro, auditável e controlável**
 
-*Configuração via IDE • Execução via Gateway • Controle total*
+*Execução via Gateway • Configuração via IDE (opcional) • Controle total*
 
 ![OpenClaw Architecture](./docs/assets/openclaw_architecture_1771620472113.png)
 
@@ -74,7 +74,26 @@ Acesse localmente com segurança.
 
 ---
 
-## 🚀 Instalação rápida
+## 🏗️ Novo projeto do zero
+
+Você pode iniciar o OpenClaw de duas formas:
+
+### 🔹 Terminal (Recomendado)
+```bash
+npx openclaw init --apply
+npx openclaw ide install --apply
+npx openclaw gateway start
+```
+
+### 🔹 Assistido pela IDE
+1. Instale as regras base via terminal: `npx @fabioforest/openclaw init --apply`
+2. Abra seu projeto na IDE com IA (Ex: Cursor).
+3. Peça no chat:
+   > *"Verifique a instalação do OpenClaw e configure o gateway e os adaptadores corretamente."*
+
+---
+
+## 🚀 Instalação Rápida (Passo a Passo)
 
 **1. Instalar OpenClaw no projeto**
 ```bash
@@ -105,7 +124,7 @@ Aqui o agente executa tarefas de verdade.
 
 **Via terminal:**
 ```bash
-npx @fabioforest/openclaw gateway status
+npx @fabioforest/openclaw gateway start
 ```
 
 Depois acesse no navegador:
