@@ -43,7 +43,8 @@ const COMMANDS = {
 function parseArgs(argv) {
     const flags = {
         plan: true, // Default: PLAN mode (read-only)
-        audit: true // Default: Generate audit logs
+        audit: true, // Default: Generate audit logs
+        _: [] // Captura subcomandos/args
     };
     let command = null;
 
@@ -62,7 +63,6 @@ function parseArgs(argv) {
             flags.quiet = true;
         } else if (arg === "--apply") {
             flags.apply = true;
-            flags.plan = false; // Apply overrides Plan default
         } else if (arg === "--plan") {
             flags.plan = true;
         } else if (arg === "--yes" || arg === "-y") {
@@ -71,13 +71,21 @@ function parseArgs(argv) {
             flags.audit = false;
         } else if (arg === "--merge") {
             flags.merge = true;
-        } else if (!arg.startsWith("-") && !command) {
-            command = arg;
+        } else if (!arg.startsWith("-")) {
+            if (!command) {
+                command = arg;
+            } else {
+                flags._.push(arg); // Captura subcomandos/args
+            }
         }
     }
 
-    // Se apply foi passado, plan é false (a menos que forçado explicitamente, mas apply vence na lógica acima)
-    // Se o usuário não passar nada, plan=true (default)
+    // Regra de precedência: apply sempre vence plan
+    if (flags.apply) flags.plan = false;
+
+    // Constrói ajudantes semânticos a partir de _
+    flags.subcommand = flags._[0] || null;
+    flags.args = flags._.slice(1);
 
     return { command, flags };
 }
