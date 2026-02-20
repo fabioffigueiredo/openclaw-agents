@@ -1,3 +1,9 @@
+
+# ⚠️ IMPORTANTE: POLÍTICA DE USO DA INTERFACE
+**Não use este chat como interface principal do OpenClaw.** 
+Use este chat *apenas* para configurar, manter, corrigir bugs ou criar novas skills do OpenClaw (via PLAN -> APPLY).
+A operação final do agente (runtime) e uso diário das skills ocorre através do terminal, do Gateway e da Web UI. Nunca assuma o controle operacional.
+
 # OpenClaw — Copilot Instructions (VS Code / GitHub)
 
 # OpenClaw IDE Chat Protocol (Consent-First)

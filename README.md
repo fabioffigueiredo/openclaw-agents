@@ -106,11 +106,23 @@ O OpenClaw vem com **25+ Skills** organizadas por pastas. Quando você pedir alg
 - **☁️ Setup em Nuvem (`vps-cloud-infra`):** Configura do zero servidores na nuvem (DigitalOcean, AWS, etc.).
 - **👔 LinkedIn Pro (`linkedin-optimizer`):** Ajuda a escrever posts otimizados para o seu perfil.
 
-**Como usar?**
-Basta abrir o chat da sua IDE (ex: Cursor) e pedir:
-> *"Ative a skill site-tester e analise meu site https://meu-projeto.com"*
+**Como usar? (A Regra de Ouro)**
 
-O roteador interno do OpenClaw fará o resto!
+O OpenClaw divide perfeitamente o seu uso em dois momentos distintos:
+
+✅ **1. Uso Diário (Runtime via Terminal ou Web UI)**
+A execução real das skills do OpenClaw para realizar suas tarefas do dia a dia acontece *fora da IDE*:
+- Inicie o OpenClaw pelo terminal (ex: `npx openclaw gateway status`);
+- Acesse a interface local pelo seu navegador (ex: `http://localhost:8000`);
+- Consuma as skills (ex: *site-tester*, *linkedin-optimizer*) através desse Gateway ou via comandos da CLI. Essa é a forma desenhada para ser segura e isolada.
+
+🛠️ **2. Manutenção do OpenClaw (Via Chat da IDE)**
+O chat de IA da sua IDE (como Cursor, Windsurf, GitHub Copilot) se torna o **Painel de Configuração** do seu agente. Use essas threads *apenas* para gerenciar o OpenClaw:
+- *"Verifique o arquivo openclaw.json e corrija problemas de porta."*
+- *"Crie uma nova skill que faça backup de dados (PLAN -> APPLY)."*
+- *"Instale e atualize os adaptadores para o projeto."*
+
+**Lembre-se:** A IDE serve para construir e consertar o motor de IA. A pista onde o carro roda é o Web Gateway e a API!
 
 ---
 

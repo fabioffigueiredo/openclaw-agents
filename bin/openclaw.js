@@ -33,6 +33,7 @@ const COMMANDS = {
     assist: "../lib/cli/assist",
     ide: "../lib/cli/ide",
     setup: "../lib/cli/setup",
+    gateway: "../lib/cli/gateway",
 };
 
 /**
@@ -111,6 +112,7 @@ function showHelp() {
     inspect   Analisa ambiente e contexto (100% read-only)
     assist    Assistente geral com roteamento de skills
     ide       Instala AI OS na IDE (ide install / ide doctor)
+    gateway   Gerencia interface HTTP local (status, print-url, doctor)
 
   Opções Globais:
     --path, -p <dir>   Diretório alvo (padrão: ./)
