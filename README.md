@@ -59,7 +59,7 @@ Quer garantir que deu tudo certo?
 ```bash
 npx @fabioforest/openclaw ide doctor
 ```
-Se tudo estiver com um ✅ verde, você está pronto para conversar com a IA no chat da sua IDE!
+Se tudo estiver com um ✅ verde, você está pronto para configurar e manter seu agente via chat da IDE, ou iniciar o Gateway Web para uso diário!
 
 ---
 
@@ -97,7 +97,7 @@ Aqui estão os comandos que você mais vai usar no dia a dia:
 
 ## 🧠 Super-Poderes Embutidos (Skills)
 
-O OpenClaw vem com **25+ Skills** organizadas por pastas. Quando você pedir algo no chat da sua IDE, ela vai automaticamente usar essas Skills.
+O OpenClaw vem com **25+ Skills** organizadas por pastas. Ao acessá-las pelo **Gateway Web** ou pelo **Terminal**, o roteador vai automaticamente executar a automação desejada de forma encapsulada.
 
 **Algumas das favoritas:**
 - **🛠️ Modo Devin (`openclaw-dev`):** Constrói features inteiras com autonomia vigiada.
