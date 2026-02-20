@@ -74,16 +74,45 @@ Acesse localmente com segurança.
 
 ---
 
+# 🧰 Instalação do CLI (Opcional mas recomendado)
+
+Você pode usar o OpenClaw de duas formas:
+
+## 🔹 Usando NPX (sem instalar)
+Executa direto do repositório:
+
+```bash
+npx @fabioforest/openclaw init --apply
+```
+
+## 🔹 Instalação global (modo profissional)
+Instala o CLI permanentemente:
+
+```bash
+npm install -g @fabioforest/openclaw
+```
+
+Depois disso você pode usar:
+
+```bash
+openclaw init --apply
+openclaw gateway start
+```
+
+---
+
 ## 🏗️ Novo projeto do zero
 
 Você pode iniciar o OpenClaw de duas formas:
 
 ### 🔹 Terminal (Recomendado)
 ```bash
-npx openclaw init --apply
-npx openclaw ide install --apply
-npx openclaw gateway start
+npx @fabioforest/openclaw init --apply
+npx @fabioforest/openclaw ide install --apply
+npx @fabioforest/openclaw gateway start
 ```
+
+> Se instalado globalmente: use apenas `openclaw` no lugar de `npx @fabioforest/openclaw`.
 
 ### 🔹 Assistido pela IDE
 1. Instale as regras base via terminal: `npx @fabioforest/openclaw init --apply`
@@ -105,6 +134,9 @@ Cria a estrutura segura `.agent/`
 ```bash
 npx @fabioforest/openclaw ide install --apply
 ```
+
+> CLI global: `openclaw ide install --apply`
+
 Ele detecta e pergunta se deseja instalar adaptadores para Cursor, VS Code, Windsurf, Qoder, Trae, Antigravity, Codex.
 *Adaptadores são opcionais e servem apenas para manutenção/configuração.*
 
@@ -112,6 +144,8 @@ Ele detecta e pergunta se deseja instalar adaptadores para Cursor, VS Code, Wind
 ```bash
 npx @fabioforest/openclaw ide doctor
 ```
+
+> CLI global: `openclaw ide doctor`
 
 ---
 
@@ -125,6 +159,11 @@ Aqui o agente executa tarefas de verdade.
 **Via terminal:**
 ```bash
 npx @fabioforest/openclaw gateway start
+```
+
+ou se global:
+```bash
+openclaw gateway start
 ```
 
 Depois acesse no navegador:
@@ -150,6 +189,13 @@ npx @fabioforest/openclaw assist
 npx @fabioforest/openclaw inspect
 npx @fabioforest/openclaw update --apply
 ```
+
+> CLI global:
+> ```bash
+> openclaw assist
+> openclaw inspect
+> openclaw update --apply
+> ```
 
 **Chat da IDE (Opcional - Painel de Engenharia)**
 Use para:
