@@ -32,6 +32,7 @@ const COMMANDS = {
     inspect: "../lib/cli/inspect",
     assist: "../lib/cli/assist",
     ide: "../lib/cli/ide",
+    setup: "../lib/cli/setup",
 };
 
 /**
@@ -144,18 +145,6 @@ async function main() {
 
     // Resolver caminho de destino
     const targetPath = path.resolve(flags.path || ".");
-
-    // Comando setup — roda wizard diretamente
-    if (command === "setup") {
-        const wizardPath = path.join(__dirname, "..", "lib", "setup", "config_wizard.js");
-        try {
-            require(wizardPath);
-        } catch (err) {
-            console.error(`❌ Erro ao rodar setup wizard: ${err.message}`);
-            process.exit(1);
-        }
-        return;
-    }
 
     // Verificar se o comando existe
     if (!COMMANDS[command]) {
