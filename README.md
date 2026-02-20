@@ -1,142 +1,265 @@
 # 🦀 OpenClaw AI OS
+**Sistema operacional de agentes de IA seguro, auditável e controlável**
 
-**O Sistema Operacional de Agentes de IA para qualquer IDE.**
-*Transforme seu Cursor, VS Code, Windsurf ou Gemini no assistente de software perfeito – com total controle, segurança e sem gastar seus tokens à toa.*
+*Configuração via IDE • Execução via Gateway • Controle total*
 
 ![OpenClaw Architecture](./docs/assets/openclaw_architecture_1771620472113.png)
 
 ---
 
-## 🌟 O que é o OpenClaw?
+## 🧠 O que é o OpenClaw?
 
-Se você já usou IA para programar (como o Cursor ou o GitHub Copilot), sabe que às vezes a IA pode "alucinar", apagar código importante ou se perder em tarefas grandes.
+O OpenClaw é um sistema operacional de agentes de IA que instala uma camada de segurança, automação e governança dentro do seu projeto.
 
-O **OpenClaw** resolve isso. Ele instala um "cérebro" seguro (um diretório oculto `.agent/`) dentro do seu projeto. Esse cérebro dita regras estritas de segurança, fornece "Skills" (habilidades) prontas para o seu agente usar e garante que ele nunca faça nada sem perguntar primeiro.
+Ele permite que você use agentes de IA de forma segura, auditável e profissional, sem risco de a IA alterar arquivos ou sistemas sem autorização.
 
-### Por que usar?
-- 🛡️ **Zero Risco:** A IA é presa em um "sandbox" (Scope Guard). Ela não pode formatar seu PC nem apagar arquivos vitais sem você digitar uma senha explícita de confirmação.
-- 🔌 **Funciona em Qualquer Lugar:** Suporte universal para as IDEs mais famosas.
-- 💸 **Economia Inteligente:** O roteador embutido escolhe modelos baratos (como Gemini Flash) para tarefas fáceis e modelos caros apenas quando necessário.
-- 🚀 **Skills Prontas:** Scripts pré-fabricados ensinam sua IA a fazer *web scraping*, testar sites, gerenciar infraestrutura em nuvem e muito mais.
+Ele funciona em qualquer ambiente:
+- Local
+- VPS
+- Docker
+- VPN
+- SSH Tunnel
+- Infraestrutura cloud privada
 
----
+E pode ser configurado por:
+- Terminal (modo profissional)
+- Chat de IDE (modo assistido)
 
-## 🔌 Compatibilidade Universal (Multi-IDE)
-
-![IDE Adapters](./docs/assets/openclaw_ide_adapters_1771620563799.png)
-
-O OpenClaw detecta automaticamente o que você está usando e instala apenas o necessário. Suportamos nativamente através do framework *Chat-First*:
-- **Cursor** (`.cursorrules`)
-- **VS Code / Copilot** (`copilot-instructions.md`)
-- **Windsurf** (`.windsurf`)
-- **Qoder** (`.qoder`)
-- **Trae** (`trae_rule.md`)
-- **Google Antigravity** (`GEMINI.md`)
-- **Codex** (`AGENTS.md`)
+**Mas a execução real do agente acontece via Gateway Web ou CLI, não via chat da IDE.**
 
 ---
 
-## 📦 Instalação Fácil (Para Iniciantes)
+## 🏗️ Arquitetura do OpenClaw
 
-Você não precisa instalar nada de forma pesada no seu computador. Basta usar o comando `npx`.
+O OpenClaw funciona em 3 camadas:
+1. **IDE Chat (opcional)** → Configuração e manutenção
+2. **Terminal/CLI** → Instalação e orquestração
+3. **Gateway Web/API** → Execução real das tarefas
 
-### Passo 1: Preparar o Projeto
-Abra o terminal na pasta do seu projeto e digite:
+A IDE ajuda a construir e manter.
+O Gateway é onde o agente opera de verdade.
+
+---
+
+## 🌐 Onde o OpenClaw pode rodar
+
+Você pode instalar o OpenClaw em qualquer cenário.
+
+### 💻 Local (desenvolvimento)
+- roda no seu PC
+- acesso: `http://localhost:8000`
+- ideal para testes e criação de skills
+
+### ☁️ VPS (produção)
+- DigitalOcean, AWS, Contabo, etc
+- recomendado com VPN
+- acesso via IP privado ou túnel
+
+### 🔐 VPS + VPN (recomendado)
+**Seu caso atual:**
+- OpenClaw na VPS
+- Acesso via WireGuard/OpenVPN
+- Gateway bind em `127.0.0.1`
+- Maior segurança possível.
+
+### 🐳 Docker
+- roda isolado em container
+- fácil backup e portabilidade
+- ideal para ambientes profissionais
+
+### 🔒 SSH Tunnel
+Caso não queira VPN:
+`ssh -L 8000:localhost:8000 usuario@vps`
+Acesse localmente com segurança.
+
+---
+
+## 🚀 Instalação rápida
+
+**1. Instalar OpenClaw no projeto**
 ```bash
-# Isso vai instalar as regras gerais e criar a pasta segura .agent/
 npx @fabioforest/openclaw init --apply
 ```
+Cria a estrutura segura `.agent/`
 
-### Passo 2: Integrar com a sua IDE
-Para que a sua IDE (Cursor, VS Code, etc.) entenda o OpenClaw:
+**2. Instalar adaptadores de IDE (opcional)**
 ```bash
-# O sistema vai detectar sua IDE e perguntar se deseja instalar os adaptadores.
 npx @fabioforest/openclaw ide install --apply
 ```
+Ele detecta e pergunta se deseja instalar adaptadores para Cursor, VS Code, Windsurf, Qoder, Trae, Antigravity, Codex.
+*Adaptadores são opcionais e servem apenas para manutenção/configuração.*
 
-### Passo 3: Verificação de Saúde
-Quer garantir que deu tudo certo?
+**3. Verificar saúde**
 ```bash
 npx @fabioforest/openclaw ide doctor
 ```
-Se tudo estiver com um ✅ verde, você está pronto para configurar e manter seu agente via chat da IDE, ou iniciar o Gateway Web para uso diário!
 
 ---
 
-## 🔒 Como funciona a Segurança? (O Fluxo de Consentimento)
+## 🧠 Como usar corretamente (REGRA DE OURO)
+
+O OpenClaw tem dois modos de uso.
+
+### 🟢 1. Uso real do agente (runtime)
+Aqui o agente executa tarefas de verdade.
+
+**Via terminal:**
+```bash
+npx @fabioforest/openclaw gateway status
+```
+
+Depois acesse no navegador:
+`http://localhost:8000`
+Ou via VPN/IP privado.
+
+**É aqui que você usa:**
+- `site-tester`
+- `linkedin-optimizer`
+- automações
+- agentes
+- workflows
+
+Este é o **uso principal**.
+
+### 🟡 2. Configuração e manutenção (IDE ou Terminal)
+
+Você pode usar:
+
+**Terminal (Modo profissional e seguro)**
+```bash
+npx @fabioforest/openclaw assist
+npx @fabioforest/openclaw inspect
+npx @fabioforest/openclaw update --apply
+```
+
+**Chat da IDE (Opcional - Painel de Engenharia)**
+Use para:
+- criar skills
+- corrigir bugs
+- revisar configs
+- instalar módulos
+- criar automações
+- hardening de segurança
+- revisar logs
+
+*Exemplo:*
+> "Verifique minha instalação do OpenClaw e sugira melhorias de segurança"
+
+**Mas o uso real continua sendo via Gateway.**
+
+---
+
+## 🔐 Fluxo de segurança obrigatório
 
 ![CLI Workflow](./docs/assets/openclaw_cli_workflow_1771620533472.png)
 
-Nós não confiamos cegamente na IA. Todo comando importante que o OpenClaw executa passa pelo **Orchestrator**, seguindo um fluxo de 5 etapas:
+Nada no OpenClaw executa sem passar por:
 
-1. 🔎 **INSPECT:** A IA olha o seu projeto (Apenas leitura).
-2. 📝 **PLAN:** A IA diz o que pretende fazer (ex: "Vou criar o arquivo index.html").
-3. 🛑 **CONSENT:** A IA para e *pergunta a você* se pode continuar. Se for perigoso, o **Scope Guard** entra em ação e bloqueia.
-4. ✅ **APPLY:** Apenas se você disser "Sim", a ação é feita.
-5. 📋 **AUDIT:** Tudo fica registrado num log para você saber quem fez o quê e quando.
+1. **INSPECT** (somente leitura)
+2. **PLAN** (plano do que será feito)
+3. **CONSENT** (sua autorização)
+4. **APPLY** (execução)
+5. **AUDIT** (registro completo)
 
-*(Qualquer comando no terminal roda em modo de Simulação (PLAN) por padrão. Nada acontece de verdade a menos que você use a flag `--apply` no terminal).*
-
----
-
-## 🎯 Guia Rápido de Comandos
-
-Aqui estão os comandos que você mais vai usar no dia a dia:
-
-| Comando | Para que serve? |
-|---------|-----------------|
-| `openclaw assist` | O **Assistente Amigável**. Não sabe o que fazer? Digite isso e ele te guia. |
-| `openclaw status` | Mostra um painel rápido de tudo que está ativo no seu projeto. |
-| `openclaw check` | O "mecânico inteligente". Ele detecta sozinho se você precisa instalar ou reparar algo. |
-| `openclaw update --apply` | Atualiza o OpenClaw salvando suas personalizações com segurança. |
-| `openclaw uninstall --apply`| Remove o OpenClaw limpando tudo bonitinho e fazendo backup. |
-
-*(Nota: Sempre que usar pelo terminal, comece com `npx @fabioforest/openclaw ...`)*
+*Modo padrão: simulação (PLAN). Só executa com `--apply`.*
 
 ---
 
-## 🧠 Super-Poderes Embutidos (Skills)
+## 🧠 Skills incluídas
 
-O OpenClaw vem com **25+ Skills** organizadas por pastas. Ao acessá-las pelo **Gateway Web** ou pelo **Terminal**, o roteador vai automaticamente executar a automação desejada de forma encapsulada.
+Exemplos:
+- `site-tester`
+- `linkedin-optimizer`
+- `vps-cloud-infra`
+- `legacy-cleanup`
+- `openclaw-dev` (modo Devin)
+- automações web
+- auditoria de segurança
+- multi-agent mission control
 
-**Algumas das favoritas:**
-- **🛠️ Modo Devin (`openclaw-dev`):** Constrói features inteiras com autonomia vigiada.
-- **🧹 Faxina de Código (`legacy-cleanup`):** Refatora código velho e bagunçado com segurança.
-- **🌐 Testador de Sites (`site-tester`):** Avalia a velocidade e o SEO do seu site sozinho.
-- **☁️ Setup em Nuvem (`vps-cloud-infra`):** Configura do zero servidores na nuvem (DigitalOcean, AWS, etc.).
-- **👔 LinkedIn Pro (`linkedin-optimizer`):** Ajuda a escrever posts otimizados para o seu perfil.
-
-**Como usar? (A Regra de Ouro)**
-
-O OpenClaw divide perfeitamente o seu uso em dois momentos distintos:
-
-✅ **1. Uso Diário (Runtime via Terminal ou Web UI)**
-A execução real das skills do OpenClaw para realizar suas tarefas do dia a dia acontece *fora da IDE*:
-- Inicie o OpenClaw pelo terminal (ex: `npx openclaw gateway status`);
-- Acesse a interface local pelo seu navegador (ex: `http://localhost:8000`);
-- Consuma as skills (ex: *site-tester*, *linkedin-optimizer*) através desse Gateway ou via comandos da CLI. Essa é a forma desenhada para ser segura e isolada.
-
-🛠️ **2. Manutenção do OpenClaw (Via Chat da IDE)**
-O chat de IA da sua IDE (como Cursor, Windsurf, GitHub Copilot) se torna o **Painel de Configuração** do seu agente. Use essas threads *apenas* para gerenciar o OpenClaw:
-- *"Verifique o arquivo openclaw.json e corrija problemas de porta."*
-- *"Crie uma nova skill que faça backup de dados (PLAN -> APPLY)."*
-- *"Instale e atualize os adaptadores para o projeto."*
-
-**Lembre-se:** A IDE serve para construir e consertar o motor de IA. A pista onde o carro roda é o Web Gateway e a API!
+Todas acessíveis via **Gateway ou CLI**.
 
 ---
 
-## 🙋 Dúvidas Frequentes
+## 🔌 Compatibilidade de IDEs (manutenção)
 
-**Isso vai pesar no meu projeto?**
-Não. O OpenClaw é extremamente leve. Ele cria apenas uma pasta oculta `.agent/` contendo arquivos de texto simples (Markdown) que instruem a IA.
+![IDE Adapters](./docs/assets/openclaw_ide_adapters_1771620563799.png)
 
-**Preciso saber programar para usar?**
-Não para os comandos básicos! O comando `npx @fabioforest/openclaw setup` faz perguntas simples em português para deixar tudo rodando em 1 minuto.
+O OpenClaw pode se integrar a:
+- Google Antigravity
+- Cursor
+- VS Code
+- Windsurf
+- Trae
+- Qoder
+- Codex
 
-**A IA pode apagar meu banco de dados?**
-Não. O **Scope Guard** intercepta comandos destrutivos (como `rm -rf`, deleções em massa) e a regra de `CONSENT_FIRST` impede a execução autônoma severa. O OpenClaw te devolve o controle.
+Mas **apenas para configurar e manter o sistema**.
+Não é necessário usar IDE para operar o agente.
 
 ---
-**Feito com 🩵 para revolucionar a forma como nós e as máquinas trabalhamos juntos.**
-*Licença MIT*
+
+## 🧠 Exemplos de uso correto
+
+**Criar nova skill**
+No chat da IDE:
+> *Crie uma nova skill para backup automático e mostre o plano antes de aplicar*
+
+**Corrigir configuração**
+No chat da IDE:
+> *Verifique openclaw.json e corrija portas e bind de segurança*
+
+**Uso real**
+No navegador (Web UI) ou Terminal:
+> *Execute site-tester no domínio X*
+
+---
+
+## 🛡️ Segurança
+
+O OpenClaw bloqueia:
+- `rm -rf`
+- deleções em massa
+- alterações críticas
+- execução root sem aviso
+- exposição pública sem auth
+
+Tudo precisa de consentimento.
+
+---
+
+## 🎯 Filosofia
+
+**A IA não deve ter controle. Você deve.**
+
+O OpenClaw existe para:
+- impedir automações perigosas
+- permitir automação avançada segura
+- dar controle total ao usuário
+- transformar IA em ferramenta profissional
+
+---
+
+## 🧪 Público ideal
+- Devs
+- Engenheiros de IA
+- Infra/DevOps
+- Criadores de agentes
+- Automação avançada
+- Empresas com IA interna
+
+---
+
+## 📜 Licença
+MIT
+
+---
+
+## 🧠 Visão
+
+OpenClaw não é um plugin.
+Não é um chatbot.
+Não é só automação.
+
+**É um sistema operacional de agentes.**
+E o operador continua sendo você.
